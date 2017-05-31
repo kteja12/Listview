@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.purdue.kteja.loginn.Main123">
+    <item
+        android:id="@+id/t10"
+        android:title="Top10"
+        />
+
+    <item android:title="Top 25"
+        android:id="@+id/t25"/>
+    <item android:title="Refresh"
+        android:id="@+id/refresh"/>
+</menu>
+
+
+
