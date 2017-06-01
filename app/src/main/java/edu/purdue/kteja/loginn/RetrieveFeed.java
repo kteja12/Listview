@@ -41,6 +41,7 @@ public class RetrieveFeed extends AsyncTask {
 
     URL url;
     ArrayList<String> title = new ArrayList();
+    ArrayList<String> summary = new ArrayList();
     ArrayList<String> links = new ArrayList();
     @Override
     protected Object doInBackground(Object[] objects) {
@@ -49,7 +50,7 @@ public class RetrieveFeed extends AsyncTask {
 
         try {
             if (MyApplication.data == 25)
-            url = new URL("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=25/xml");
+                url = new URL("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=25/xml");
             else
                 url = new URL("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml");
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -79,17 +80,21 @@ public class RetrieveFeed extends AsyncTask {
                     } else if (xpp.getName().equalsIgnoreCase("title")) {
                         if (insideItem)
                             title.add(xpp.nextText()); //extract the headline
+                    }
+                    else if (xpp.getName().equalsIgnoreCase("summary")) {
+                        if (insideItem)
+                            summary.add(xpp.nextText());
 
 
-//                    } else if (xpp.getName().equalsIgnoreCase("im:image")) {
-//                        if (insideItem) {
-//                            boolean check = false;
-//                            String imagesize = xpp.getAttributeValue(null, "height");
-//                            if (imagesize.equals("53")) {
-//                                check = true;
-//                            }if (check )
-//                            links.add(xpp.nextText()); //extract the link of article
-//
+                    } else if (xpp.getName().equalsIgnoreCase("im:image")) {
+////                        if (insideItem) {
+                        boolean check = false;
+                        String imagesize = xpp.getAttributeValue(null, "height");
+                        if (imagesize.equals("53")) {
+                            check = true;
+                        }if (check )
+                            links.add(xpp.nextText()); //extract the link of article
+
 //
 //                        }
                     }
@@ -125,8 +130,13 @@ public class RetrieveFeed extends AsyncTask {
     {
         return title;
     }
+    public ArrayList<String> getSummary()
+    {
+        return summary;
+    }
     public ArrayList<String> images12()
     {
         return links;
     }
+
 }

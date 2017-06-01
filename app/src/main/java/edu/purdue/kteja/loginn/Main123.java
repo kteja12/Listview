@@ -52,14 +52,23 @@ public class Main123 extends AppCompatActivity
         getXML.execute();
         images = getXML.images12();
 
+        ArrayList<String> summary = new ArrayList<>();
+        getXML = new RetrieveFeed();
+        getXML.execute();
+        summary = getXML.getSummary();
+
+
+
 //            this.setListAdapter(new ArrayAdapter<String>(
 //                    this, R.layout.mylist,
 //                    R.id.Itemname,images));
         // Binding data
-        ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, headlines);
-
-        listview.setAdapter(adapter);
+//        ArrayAdapter adapter = new ArrayAdapter(this,
+//                android.R.layout.simple_list_item_1, headlines);
+//
+//        listview.setAdapter(adapter);
+        final ListView lv = (ListView) findViewById(R.id.nm123);
+        lv.setAdapter(new MyCustomBaseAdapter(this,headlines,summary,images));
     }
 
 
